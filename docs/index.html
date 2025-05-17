@@ -14,8 +14,20 @@
         <p>有效期：2025-05-20</p>
     </div>
     <script>
-        // 模拟数据加载（可替换为真实 API）
-        console.log("原型页已部署");
+        fetch("https://gist.githubusercontent.com/suajd542/3a9267c8a4b9a69a330fbdc1a44c6d79/raw/7016789f5a6575d3c7e0726a86b36c659540033a/products.json")
+      .then(res => res.json())
+      .then(data => {
+            data.items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.innerHTML = `
+                    <h3>${item.name}</h3>
+                    <p>原价：${item.price}元 | 现价：${item.discount}元</p>
+                    <p>有效期：${item.expire}</p>
+                `;
+                document.body.appendChild(div);
+            });
+        });
     </script>
 </body>
 </html>
